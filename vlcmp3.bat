@@ -41,7 +41,9 @@ rem Handle any special characters
 setlocal enabledelayedexpansion
 rem Remove extra quotes
 set SOURCE="!SOURCE:~1,-1!"
+set TARGET=!SOURCE:.mp4=.mp3!
 rem Create temp-input file to avoid dealing further with special characters
+@echo Creating copy of !SOURCE! as "!INPUT!"...
 copy /v /y /b !SOURCE! "!INPUT!"
 if not exist "!INPUT!" (
     @echo.
@@ -75,6 +77,7 @@ if exist "%INPUT%" (
 
 rem Rename temp-output file to target name
 if exist "!OUTPUT!" (
+    @echo Renaming "!OUTPUT!" to !TARGET!...
     move /y "!OUTPUT!" !TARGET!
 ) else (
     @echo.
